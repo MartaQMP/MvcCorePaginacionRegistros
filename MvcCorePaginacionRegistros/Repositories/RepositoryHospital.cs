@@ -109,6 +109,11 @@ namespace MvcCorePaginacionRegistros.Repositories
             return await this.context.Empleados.Where(e => e.IdDepartamento == id).ToListAsync();
         }
 
+        public async Task<List<Empleado>> GetEmpleadosByDepartamentoEFAsync(int id, int posicion)
+        {
+            return await this.context.Empleados.Where(e => e.IdDepartamento == id).Skip(posicion).Take(1).ToListAsync();
+        }
+
         #endregion
 
         #region CLASE

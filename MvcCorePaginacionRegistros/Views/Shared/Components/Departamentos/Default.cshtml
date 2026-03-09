@@ -7,7 +7,7 @@
     <ul class="dropdown-menu">
         @foreach (Departamento dept in Model)
         {
-            <li><a class="dropdown-item" asp-controller="Departamento" asp-action="Details" asp-route-id="@dept.IdDepartamento">@dept.Nombre</a></li>
+            <li><a class="dropdown-item" asp-controller="Departamento" asp-action="DetailsEF" asp-route-id="@dept.IdDepartamento">@dept.Nombre</a></li>
         }
     </ul>
 </li>

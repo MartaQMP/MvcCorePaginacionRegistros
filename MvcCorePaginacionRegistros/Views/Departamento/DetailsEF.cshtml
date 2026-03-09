@@ -15,16 +15,16 @@
     <div>
         <ul>
             <li>
-                <a asp-controller="Departamento" asp-action="Details" asp-route-posicion="1" asp-route-id="@dept.IdDepartamento">Primero</a>
+                <a asp-controller="Departamento" asp-action="DetailsEF" asp-route-posicion="1" asp-route-id="@dept.IdDepartamento">Primero</a>
             </li>
             <li>
-                <a asp-controller="Departamento" asp-action="Details" asp-route-posicion="@ViewBag.Anterior" asp-route-id="@dept.IdDepartamento">Anterior</a>
+                <a asp-controller="Departamento" asp-action="DetailsEF" asp-route-posicion="@ViewBag.Anterior" asp-route-id="@dept.IdDepartamento">Anterior</a>
             </li>
             <li>
-                <a asp-controller="Departamento" asp-action="Details" asp-route-posicion="@ViewBag.Siguiente" asp-route-id="@dept.IdDepartamento">Siguiente</a>
+                <a asp-controller="Departamento" asp-action="DetailsEF" asp-route-posicion="@ViewBag.Siguiente" asp-route-id="@dept.IdDepartamento">Siguiente</a>
             </li>
             <li>
-                <a asp-controller="Departamento" asp-action="Details" asp-route-posicion="@ViewBag.Ultimo" asp-route-id="@dept.IdDepartamento">Ultimo</a>
+                <a asp-controller="Departamento" asp-action="DetailsEF" asp-route-posicion="@ViewBag.Ultimo" asp-route-id="@dept.IdDepartamento">Ultimo</a>
             </li>
         </ul>
     </div>
