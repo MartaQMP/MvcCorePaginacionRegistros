@@ -72,6 +72,20 @@ using System.Runtime.CompilerServices;
 	    WHERE (QUERY.POSICION >= @posicion AND QUERY.POSICION < (@posicion + 3))
     GO
 
+------------
+--PRACTICA--
+------------
+
+    CREATE PROCEDURE SP_EMPLEADOS_DEPARTAMENTO (@posicion int, @id int, @registros int out)
+    AS
+		SELECT @registros = COUNT(EMP_NO) FROM EMP WHERE DEPT_NO=@id;
+	    SELECT EMP_NO, APELLIDO, OFICIO, SALARIO FROM 
+		    (SELECT CAST(ROW_NUMBER() OVER(ORDER BY APELLIDO) AS INT) AS POSICION, 
+		    EMP_NO, APELLIDO, OFICIO, SALARIO FROM EMP
+		    WHERE DEPT_NO = @id) QUERY
+	    WHERE (QUERY.POSICION = @posicion )
+    GO
+
 */
 #endregion
 
@@ -112,6 +126,23 @@ namespace MvcCorePaginacionRegistros.Repositories
         public async Task<List<Empleado>> GetEmpleadosByDepartamentoEFAsync(int id, int posicion)
         {
             return await this.context.Empleados.Where(e => e.IdDepartamento == id).Skip(posicion).Take(1).ToListAsync();
+        }
+
+        public async Task<ModelEmpleadosOficio> GetEmpleadosDepartamentoOutAsync(int id, int posicion)
+        {
+            string sql = "SP_EMPLEADOS_DEPARTAMENTO @posicion, @id, @registros out";
+            SqlParameter pamPosi = new SqlParameter("@posicion", posicion);
+            SqlParameter pamId = new SqlParameter("@id", id);
+            SqlParameter pamReg = new SqlParameter("@registros", SqlDbType.Int);
+            pamReg.Direction = ParameterDirection.Output;
+            var consulta = this.context.Empleados.FromSqlRaw(sql, pamPosi, pamId, pamReg);
+            List<Empleado> empleados = await consulta.ToListAsync();
+            int registros = (int)pamReg.Value;
+            return new ModelEmpleadosOficio
+            {
+                Empleados = empleados,
+                NumeroRegistros = registros
+            };
         }
 
         #endregion

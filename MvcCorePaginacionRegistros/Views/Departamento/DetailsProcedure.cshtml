@@ -1,0 +1,37 @@
+﻿@model Empleado
+@{
+    Departamento dept = (Departamento)ViewBag.Departamento;
+}
+
+<ul class="list-group">
+    <li class="list-group-item">Id: @dept.IdDepartamento</li>
+    <li class="list-group-item">Nombre: @dept.Nombre</li>
+    <li class="list-group-item">Localidad: @dept.Localidad</li>
+</ul>
+<hr />
+<h5>Registro @ViewBag.Posicion de @ViewBag.Ultimo</h5>
+@if (Model != null)
+{
+    <div>
+        <ul>
+            <li>
+                <a asp-controller="Departamento" asp-action="DetailsProcedure" asp-route-posicion="1" asp-route-id="@dept.IdDepartamento">Primero</a>
+            </li>
+            <li>
+                <a asp-controller="Departamento" asp-action="DetailsProcedure" asp-route-posicion="@ViewBag.Anterior" asp-route-id="@dept.IdDepartamento">Anterior</a>
+            </li>
+            <li>
+                <a asp-controller="Departamento" asp-action="DetailsProcedure" asp-route-posicion="@ViewBag.Siguiente" asp-route-id="@dept.IdDepartamento">Siguiente</a>
+            </li>
+            <li>
+                <a asp-controller="Departamento" asp-action="DetailsProcedure" asp-route-posicion="@ViewBag.Ultimo" asp-route-id="@dept.IdDepartamento">Ultimo</a>
+            </li>
+        </ul>
+    </div>
+    <hr />
+    <ul class="list-group">
+        <li class="list-group-item">Apellido: @Model.Apellido</li>
+        <li class="list-group-item">Oficio: @Model.Oficio</li>
+        <li class="list-group-item">Salario: @Model.Salario</li>
+    </ul>
+}

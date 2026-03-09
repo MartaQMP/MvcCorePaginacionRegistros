@@ -77,7 +77,38 @@ namespace MvcCorePaginacionRegistros.Controllers
             return View(empleados.FirstOrDefault());
         }
 
+        public async Task<IActionResult> DetailsProcedure(int? posicion, int id)
+        {
+            Departamento dept = await this.repo.GetDepartamentoByIdAsync(id);
+            if (posicion == null)
+            {
+                posicion = 1;
+            }
+            ModelEmpleadosOficio model = await this.repo.GetEmpleadosDepartamentoOutAsync(id, posicion.Value);
 
+            int siguiente = posicion.Value + 1;
+            if (siguiente > model.NumeroRegistros)
+            {
+                siguiente = model.NumeroRegistros;
+            }
+            int anterior = posicion.Value - 1;
+            if (anterior < 1)
+            {
+                anterior = 1;
+            }
+            ViewBag.Posicion = posicion;
+            ViewBag.Ultimo = model.NumeroRegistros;
+            ViewBag.Siguiente = siguiente;
+            ViewBag.Anterior = anterior;
+            ViewBag.Departamento = dept;
+            List<Empleado> empleados = model.Empleados;
+            if (empleados.Count == 0)
+            {
+                return View();
+            }
+            Empleado empleado = empleados[0];
+            return View(empleado);
+        }
 
     }
 }
