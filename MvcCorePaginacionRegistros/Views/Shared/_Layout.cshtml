@@ -42,8 +42,21 @@
                             <a class="nav-link text-light" asp-controller="Paginacion" asp-action="RegistroVistaDepartamento">Paginacion Individual</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-controller="Paginacion" asp-action="GrupoVistaDepartamentos">Paginacion Grupo</a>
+                            <a class="nav-link text-light" asp-controller="Paginacion" asp-action="GrupoVistaDepartamentos">Paginacion Grupo Vista</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-controller="Paginacion" asp-action="GrupoDepartamentos">Paginacion Grupo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-controller="Paginacion" asp-action="PaginarGrupoEmpleados">Paginacion Empleados Grupo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-controller="Paginacion" asp-action="EmpleadosOficio">Empleados Oficio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-controller="Paginacion" asp-action="EmpleadosOficioOut">Empleados Oficio Out</a>
+                        </li>
+                        @await Component.InvokeAsync("Departamentos");
                     </ul>
                 </div>
             </div>
